@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+     <title>Customer Information Form</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- styles -->
+    <link href="http://manager.digbydukeeyewear.com/css/bootstrap.css" rel="stylesheet">
+    <style type="text/css">
+
+      .bgcolor {
+        background-color: none;
+      }
+
+      .lightblue {
+       background-color: none;
+      }
+
+   .form-horizontal .control-label {
+      width: 135px;
+      font-size: 12px;
+      }
+      select{
+        width:90px;
+      }
+      /*
+      label.valid {
+		  width: 24px;
+		  height: 24px;
+		  background: url("img/valid.png") center center no-repeat;
+		  display: inline-block;
+		  text-indent: -9999px;
+		}*/
+      label.error {
+              font-weight: normal;
+              color: red;
+              padding: 2px 4px;
+              margin-top: 2px;
+      }
+     /*
+   .form-horizontal .controls {
+     margin-left: 110px;
+       }
+       */
+    </style>
+    <link href="http://manager.digbydukeeyewear.com/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="http://manager.digbydukeeyewear.com/css/chosen.min.css" rel="stylesheet">
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- fav and touch icons -->
+  </head>
+
+  <body>
+    <div class="container-fluid">
+    <header>
+        <div class="row-fluid">
+            <div class="span3 bgcolor">
+                    <img src="http://manager.digbydukeeyewear.com/img/logo1.png" alt="digbyduke" />
+            </div>
+            <div class="span7 bgcolor">
+               <div class="navbar navbar-inverse">
+                <div class="navbar-inner">
+                  <div class="container-fluid">
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                 <span class="icon-bar"></span>
+                 <span class="icon-bar"></span>
+                 <span class="icon-bar"></span>
+                </a>
+                <div class="nav-collapse collapse">
+                    <ul class="nav">
+                     <li class="active"><a href="index.php">Home</a></li>
+                     <li><a href="UserReport_new.php">User Report</a></li>
+					 <li><a href="inventory_report.php">Inventory Report</a></li>
+                     <li><a href="logout.php">Logout</a></li>
+                    </ul>
+                </div><!-- /.nav-collapse -->
+                </div><!-- /.container -->
+                </div><!-- /.navbar-inner -->
+              </div><!-- /.navbar -->
+            </div>
+        </div>
+        </header>
+</div>
+
+<div class="container-fluid">
+      <form action="" id="contact-form" class="form-horizontal" method="post">
+
+
+      <legend># of orders in this for {{items.itemsCount}}</legend>
+      <div class="row-fluid">
+                     <div class="span12 bgcolor">
+              <div class="control-group">
+                <label class="control-label" for="street">Digbyduke Order:</label>
+                <div class="controls">
+                  <input type="text" class="input-" id="cid" name="cid" value="{{order.id}}-{{order.name}}">
+                </div>
+              </div>
+            </div>
+      </div>
+
+      <div class="row-fluid">
+                     <div class="span12 bgcolor">
+              <div class="control-group">
+                <label class="control-label" for="street">Product Id:</label>
+                <div class="controls">
+                  <input type="text" class="input-" id="cid" name="cid" value="{{ items.sku | first}}">
+                </div>
+              </div>
+            </div>
+      </div>
+
+
+      <div class="row-fluid">
+        <div class="span8">
+
+
+
+           <div class="row-fluid">
+
+            <div class="span6 bgcolor">
+              <div class="control-group">
+               <label class="control-label" for="nricno">Shipping Address:</label>
+                <div class="controls">
+                  <div>
+                    <strong>{{ship.first_name}},{{ship.first_name}}</strong></br>
+                    {{ ship.address1 }}<br/>
+                     {{ ship.address2 }}<br/>
+                     {{ ship.city }}, {{ ship.province }} - {{ ship.zip }} </br>
+                     {{ ship.country }}<br/>
+                     <a>ph:</a>{{ ship.phone }} <br/>
+
+
+                  </div>
+
+
+                <!--   <textarea name="address" id="address" style ="min-width: 350px; min-height: 90px;" value = "{{ shipTo}}" placeholder = "{{ shipTo}}" ></textarea>
+              -->
+              </div>
+              </div>
+            </div><!--/span-->
+          </div><!--/row-->
+
+          <!-- include shipping form snippet  -->
+
+          {% include 'snippets/snippet_shipping_form.html' %}
+
+
+
+          <!-- include prescription form snippet  -->
+
+          {% include 'snippets/snippet_prescription_form.html' %}
+
+          <fieldset>
+          <legend>Order Info</legend>
+          <div class="row-fluid">
+            <div class="span6 bgcolor">
+              <div class="control-group">
+                <label class="control-label" for="orderdate">Order Date</label>
+                <div class="controls">
+                  <input type="text" id="orderdate" name="orderdate" value="{{ order.created_at }}">
+                </div>
+              </div>
+            </div><!--/span-->
+            <div class="span6 bgcolor">
+              <div class="control-group">
+                <label class="control-label" for="state">Required Date (Order Date+1)</label>
+                <div class="controls">
+                  <input type="text" id="reqorderdate" name="reqorderdate" value="20-05-2015">
+                </div>
+              </div>
+            </div><!--/span-->
+          </div><!--/row-->
+          <div class="row-fluid">
+            <div class="span6 bgcolor">
+              <div class="control-group">
+                <label class="control-label" for="frameinfo">Frame Info</label>
+                <div class="controls">
+                  <select name="frameinfo" id="frameinfo" style="width:225px;">
+			    <option value=''>Select one</option><option value='10118-C206'>10118-C206</option><option value='1019-C25'>1019-C25</option><option value='1033-C1'>1033-C1</option><option value='1036-C304'>1036-C304</option><option value='1097-TR90/C01'>1097-TR90/C01</option><option value='1097-TR90/C382'>1097-TR90/C382</option><option value='1098-C295'>1098-C295</option><option value='1098-C326'>1098-C326</option><option value='1098-TR90/C01'>1098-TR90/C01</option><option value='2018-C19'>2018-C19</option><option value='2026-C21'>2026-C21</option><option value='2028-C1B'>2028-C1B</option><option value='2035-C143'>2035-C143</option><option value='2036-C10B'>2036-C10B</option><option value='2036-C21'>2036-C21</option><option value='2326-C31'>2326-C31</option><option value='24051-C9'>24051-C9</option><option value='24057-C9'>24057-C9</option><option value='24066-C9'>24066-C9</option><option value='24091-C15'>24091-C15</option><option value='24091-C7'>24091-C7</option><option value='3010-C145'>3010-C145</option><option value='3043-C152B'>3043-C152B</option><option value='3043-C3'>3043-C3</option><option value='3049-C140A'>3049-C140A</option><option value='6002-C85'>6002-C85</option><option value='6003-C140'>6003-C140</option><option value='6003-C60'>6003-C60</option><option value='6038-C72'>6038-C72</option><option value='6039-C59'>6039-C59</option><option value='6118-C187'>6118-C187</option><option value='6122-C47'>6122-C47</option><option value='6354-C135'>6354-C135</option><option value='6611-C26'>6611-C26</option><option value='6611-C28'>6611-C28</option><option value='7032-C2'>7032-C2</option><option value='9012-C148'>9012-C148</option><option value='9920-C53'>9920-C53</option><option value='9927-C56'>9927-C56</option><option value='9951-C1'>9951-C1</option><option value='9951-C18'>9951-C18</option><option value='9952-C16'>9952-C16</option><option value='DD001-C1'>DD001-C1</option><option value='DD001-C2'>DD001-C2</option><option value='DD001-C3'>DD001-C3</option><option value='DD002-C1'>DD002-C1</option><option value='DD002-C2'>DD002-C2</option><option value='DD002-C3'>DD002-C3</option><option value='DD002-C4'>DD002-C4</option><option value='DD002-C5'>DD002-C5</option><option value='DD003-C1'>DD003-C1</option><option value='DD003-C2'>DD003-C2</option><option value='DD004-C1'>DD004-C1</option><option value='DD004-C2'>DD004-C2</option><option value='DD004-C3'>DD004-C3</option><option value='DD005-C1'>DD005-C1</option><option value='DD006-C1'>DD006-C1</option><option value='DD006-C2'>DD006-C2</option><option value='DD006-C3'>DD006-C3</option><option value='DD007-C1'>DD007-C1</option><option value='DD008-C1'>DD008-C1</option><option value='DD009-C1'>DD009-C1</option><option value='DD010-C1'>DD010-C1</option><option value='DD011-C1'>DD011-C1</option><option value='DD012-C1'>DD012-C1</option><option value='DD013-C1'>DD013-C1</option><option value='DD013-C2'>DD013-C2</option><option value='DD014-C1'>DD014-C1</option><option value='DD015-C1'>DD015-C1</option><option value='DD016-C1'>DD016-C1</option><option value='DD017-C1'>DD017-C1</option><option value='DD017-C2'>DD017-C2</option><option value='DD017-C3'>DD017-C3</option><option value='DD018-C1'>DD018-C1</option><option value='DD018-C2'>DD018-C2</option><option value='DEX SUNGLASSES-C40'>DEX SUNGLASSES-C40</option><option value='DEX SUNGLASSES-C41'>DEX SUNGLASSES-C41</option><option value='DEX SUNGLASSES-C42'>DEX SUNGLASSES-C42</option><option value='DEX-C40'>DEX-C40</option><option value='DEX-C41'>DEX-C41</option><option value='DEX-C42'>DEX-C42</option><option value='F002-C1'>F002-C1</option><option value='F002-C2'>F002-C2</option><option value='F002-C3'>F002-C3</option><option value='F003-C1'>F003-C1</option><option value='F003-C2'>F003-C2</option><option value='F003-C3'>F003-C3</option><option value='F004-C1'>F004-C1</option><option value='F004-C2'>F004-C2</option><option value='F004-C3'>F004-C3</option><option value='F005-C1'>F005-C1</option><option value='F005-C2'>F005-C2</option><option value='F005-C3'>F005-C3</option><option value='F006-C1'>F006-C1</option><option value='F006-C2'>F006-C2</option><option value='F006-C3'>F006-C3</option><option value='F007-C1'>F007-C1</option><option value='F007-C2'>F007-C2</option><option value='F007-C3'>F007-C3</option><option value='F009-C1'>F009-C1</option><option value='F010-C1'>F010-C1</option><option value='F010-C2'>F010-C2</option><option value='F010-C3'>F010-C3</option><option value='F013-C1'>F013-C1</option><option value='F013-C2'>F013-C2</option><option value='F013-C3'>F013-C3</option><option value='F015-C1'>F015-C1</option><option value='F015-C2'>F015-C2</option><option value='F015-C3'>F015-C3</option><option value='F016-C1'>F016-C1</option><option value='F016-C2'>F016-C2</option><option value='F016-C3'>F016-C3</option><option value='F016A-C1'>F016A-C1</option><option value='F016A-C2'>F016A-C2</option><option value='F017-C1'>F017-C1</option><option value='F017-C2'>F017-C2</option><option value='F017-C3'>F017-C3</option><option value='F018-C1'>F018-C1</option><option value='F018-C2'>F018-C2</option><option value='F019-C1'>F019-C1</option><option value='F019-C2'>F019-C2</option><option value='F019-C3'>F019-C3</option><option value='F021-C1'>F021-C1</option><option value='F021-C2'>F021-C2</option><option value='F021-C3'>F021-C3</option><option value='F022-C1'>F022-C1</option><option value='F022-C2'>F022-C2</option><option value='F022-C3'>F022-C3</option><option value='F023-C1'>F023-C1</option><option value='F023-C2'>F023-C2</option><option value='F023-C3'>F023-C3</option><option value='F024-C1'>F024-C1</option><option value='F024-C2'>F024-C2</option><option value='F024-C3'>F024-C3</option><option value='FLORAL WHITE-TR90'>FLORAL WHITE-TR90</option><option value='JAC 4002-B'>JAC 4002-B</option><option value='JAC 4002-C'>JAC 4002-C</option><option value='JAC 4002-D'>JAC 4002-D</option><option value='JAC 8002-A'>JAC 8002-A</option><option value='JAC 8002-B'>JAC 8002-B</option><option value='JAC 8002-C'>JAC 8002-C</option><option value='JAC 8002-D'>JAC 8002-D</option><option value='JAC4004-A'>JAC4004-A</option><option value='JAC4004-B'>JAC4004-B</option><option value='JAC4004-C'>JAC4004-C</option><option value='JAC4004-D'>JAC4004-D</option><option value='JAC8003-A'>JAC8003-A</option><option value='JAC8003-B'>JAC8003-B</option><option value='JAC8003-C'>JAC8003-C</option><option value='JAC8003-D'>JAC8003-D</option><option value='M001-C1'>M001-C1</option><option value='M001-C2'>M001-C2</option><option value='M001-C3'>M001-C3</option><option value='M002-C1'>M002-C1</option><option value='M002-C2'>M002-C2</option><option value='M002-C3'>M002-C3</option><option value='M003-C1'>M003-C1</option><option value='M003-C2'>M003-C2</option><option value='M003-C3'>M003-C3</option><option value='M004-C1'>M004-C1</option><option value='M004-C2'>M004-C2</option><option value='M004-C3'>M004-C3</option><option value='M005-C1'>M005-C1</option><option value='M005-C2'>M005-C2</option><option value='M005-C3'>M005-C3</option><option value='M006-C1'>M006-C1</option><option value='M006-C2'>M006-C2</option><option value='M006-C3'>M006-C3</option><option value='M007-C1'>M007-C1</option><option value='M007-C2'>M007-C2</option><option value='M007-C3'>M007-C3</option><option value='M008-C1'>M008-C1</option><option value='M009-C2'>M009-C2</option><option value='M009-C3'>M009-C3</option><option value='M010-C1'>M010-C1</option><option value='M010-C2'>M010-C2</option><option value='M010-C3'>M010-C3</option><option value='M011-C1'>M011-C1</option><option value='M011-C2'>M011-C2</option><option value='M011-C3'>M011-C3</option><option value='M013-C1'>M013-C1</option><option value='M013-C2'>M013-C2</option><option value='M013-C3'>M013-C3</option><option value='M014-C1'>M014-C1</option><option value='M014-C2'>M014-C2</option><option value='M014-C3'>M014-C3</option><option value='M015-C1'>M015-C1</option><option value='M019-C1'>M019-C1</option><option value='M019-C2'>M019-C2</option><option value='M019-C3'>M019-C3</option><option value='M020-C1'>M020-C1</option><option value='M020-C2'>M020-C2</option><option value='M020-C3'>M020-C3</option><option value='RYTR1219-C2'>RYTR1219-C2</option><option value='z-nondd'>z-nondd</option>		  </select>
+                </div>
+              </div>
+            </div><!--/span-->
+            <div class="span6 bgcolor">
+              <div class="control-group">
+                <label class="control-label" for="country">Comment</label>
+                <div class="controls">
+                  <textarea id="comment" name="comment" style ="min-width: 300px; min-height: 60px;"></textarea>
+                </div>
+              </div>
+
+            </div><!--/span-->
+          </div><!--/row-->
+          <div class="row-fluid">
+            <div class="span12 bgcolor">
+              <!-- <div class="control-group">
+                <label class="control-label" for="street">Optician Name</label>
+                <div class="controls">
+                  <input type="text" class="input-xxlarge" id="opticianname" name="opticianname">
+                </div>
+              </div> -->
+            </div>
+          </div>
+          </fieldset>
+        <div class="form-actions">
+	<input type="hidden" name="checkpost" value="1"/>
+	<button type="submit" class="btn btn-primary btn-large">Submit</button>
+	</div>
+        </div><!--/span-->
+
+        <div class="span4">
+
+        </div><!--/span-->
+      </div><!--/row-->
+      </form>
+
+      <hr>
+
+      <footer>
+        <p>&copy; Digbyduke</p>
+      </footer>
+
+    </div><!--/.fluid-container-->
+
+    <!-- javascript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="http://manager.digbydukeeyewear.com/js/jquery-1.8.0.min.js"></script>
+    <script src="http://manager.digbydukeeyewear.com/js/bootstrap.js"></script>
+    <!-- Validate plugin -->
+<script src="http://manager.digbydukeeyewear.com/js/jquery.validate.min.js"></script>
+<script src="http://manager.digbydukeeyewear.com/js/chosen.jquery.min.js"></script>
+<!-- Scripts specific to this page -->
+<script src="http://manager.digbydukeeyewear.com/js/script.js"></script>
+<script>
+          $(document).ready(function(){
+                $('#frameinfo').chosen();
+          });
+</script>
+  </body>
+</html>
+

@@ -1,0 +1,33 @@
+/* vikas addition for digbyduke customization
+
+
+         logic:
+         if ajax response == success {
+
+         set someelement id = "sucess";
+
+         show checkout button in the modal itself.
+
+         }
+
+         when closing fancybox close  botton (1860 line, fancybox.js)
+
+         if someelemnt id == "success"; {
+
+         then
+         hide everything thing ..take it to check out.
+
+         else
+         get back to the form showing three options ...
+
+
+         }
+
+         //$("#upload-attribute").val('ThankYou. you are all set..edit fancyboxjs for this message');//set value of the
+
+         //$("#mainOptions").slideUp("slow");
+
+         //$(".cart-option").slideUp("slow");
+
+
+         */

@@ -1,0 +1,11 @@
+{
+  "transport": "scp",
+  "hostname": "178.238.232.229",
+  "port": 22,
+  "username": "vik",
+  "password": "teaseharsh",
+  "target": "/var/www/html/projects/shop",
+  "ignore": [
+    ".git/**"
+  ]
+}

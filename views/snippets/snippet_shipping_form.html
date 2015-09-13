@@ -1,0 +1,82 @@
+<fieldset> <!-- update shipping address if required -->
+<legend>Shipping </legend>
+<div class="row-fluid">
+  <div class="span6 bgcolor">
+    <div class="control-group">
+      <label class="control-label" for="orderdate">Name:</label>
+      <div class="controls">
+        <input type="text" id="custName" name="custName" value="{{ship.first_name}},{{ship.first_name}}">
+      </div>
+    </div>
+  </div>
+  <div class="span6 bgcolor">
+    <div class="control-group">
+      <label class="control-label" for="orderdate">Phone:</label>
+      <div class="controls">
+        <input type="text" id="custPhone" name="custPhone" value="{{ship.phone}}">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row-fluid">
+  <div class="span6 bgcolor">
+    <div class="control-group">
+      <label class="control-label" for="state">Address line 1:</label>
+      <div class="controls">
+        <input type="text" id="address1" name="address1" value="{{ ship.address1 }}">
+      </div>
+    </div>
+  </div><!--/span-->
+  <div class="span6 bgcolor">
+    <div class="control-group">
+      <label class="control-label" for="state">Address line 2:</label>
+      <div class="controls">
+        <input type="text" id="address2" name="address2" value="{{ ship.address2 }}">
+      </div>
+    </div>
+  </div><!--/span-->
+</div>
+
+<div class="row-fluid">
+
+  <div class="span6 bgcolor">
+    <div class="control-group">
+      <label class="control-label" for="orderdate">City:</label>
+      <div class="controls">
+        <input type="text" id="city" name="city" value="{{ship.city}}">
+      </div>
+    </div>
+  </div><!--/span-->
+  <div class="span6 bgcolor">
+    <div class="control-group">
+      <label class="control-label" for="state">Province:</label>
+      <div class="controls">
+        <input type="text" id="province" name="province" value="{{ ship.province }}">
+      </div>
+    </div>
+  </div><!--/span-->
+
+</div>
+
+<div class="row-fluid">
+  <div class="span6 bgcolor">
+    <div class="control-group">
+      <label class="control-label" for="state">Zip/Pin Code:</label>
+      <div class="controls">
+        <input type="text" id="province" name="zip" value="{{ ship.zip }}">
+      </div>
+    </div>
+  </div><!--/span-->
+  <div class="span6 bgcolor">
+  <div class="control-group">
+    <label class="control-label" for="orderdate">Country:</label>
+    <div class="controls">
+      <input type="text" id="country" name="country" value="{{ship.country}}">
+    </div>
+  </div>
+</div><!--/span-->
+
+</div>
+
+</fieldset> <!-- snippet shipping_form -->

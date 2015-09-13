@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>SB Admin 2 - Bootstrap Admin Theme</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="../bootstrap-sba/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- MetisMenu CSS -->
+    <link href="../bootstrap-sba/bower_components/metisMenu/dist/metisMenu.min.css" rel="stylesheet">
+
+    <!-- DataTables CSS -->
+    <link href="../bootstrap-sba/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+    <!-- DataTables Responsive CSS -->
+    <link href="../bootstrap-sba/bower_components/datatables-responsive/css/dataTables.responsive.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="../bootstrap-sba/dist/css/sb-admin-2.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="../bootstrap-sba/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+      <!-- Navigation -->
+
+      {% include 'snippets/navigation.html' %}
+
+      <!-- Navigation -->
+
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                   <h1 class="page-header">All Orders:<code>{{ordersAll|length }}</code></h1>
+
+                   <!---  <button class="btn btn-primary" type="button">Orders <span class="badge">{{orders|length }}</span></button> -->
+                </div>
+
+
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <!-- /.tabs start  -->
+
+            <ul class="nav nav-tabs">
+              <li class="active"><a data-toggle="tab" href="#tab1"><button class="btn btn-primary" type="button">Orders <span class="badge">{{orders|length }}</span></button></a></li>
+              <li><a data-toggle="tab" href="#tab2"><button class="btn btn-primary" type="button">Payments <span class="badge">{{payments|length }}</span></button></a></li>
+              <!-- <li><a data-toggle="tab" href="#tab3"><button class="btn btn-default" type="button">All Orders<span class="badge">{{ordersAll|length }}</span></button></a></li> -->
+            </ul>
+
+        <div class="tab-content"><!-- /.tabs contents   -->
+            <div id="tab1" class="row tab-pane fade in active"> <!-- /.tabs 1   -->
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                          Orders status and action panel: Prescription could be any of 1)an uploaded file, 2) user inputs, 3) call customer<!-- / vikas stuff starts here -->
+                        </div>
+                        <!-- /.panel-heading -->
+                        <div class="panel-body">
+                            <div class="dataTable_wrapper">
+                                <table class="table table-striped table-bordered table-hover" id="dataTables-example">
+
+
+                                    <thead>
+                                        <tr>
+                                            <th>OrderName</th>
+                                            <th>Order Date</th>
+                                            <th>Customer</th>
+                                            <th>Prescrip Details</th>
+
+                                            <th>Lab Status</th>
+
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+
+                                      {% for order in orders %} <!-- / .order loop in twig -->
+                                        <tr class="odd gradeX">
+                                            <td><a href="https://eyes.myshopify.com/admin/orders/{{order.id}}" target="_blank">{{order.name}}</a></td>
+                                            <td>{{order.created_at[:10]}}</td>
+                                            <td class="center">{{order.customer['last_name']}},{{order.customer['first_name']}}</td>
+
+                                            <!--.prescription info -->
+                                            {% if order.dd_attributes['optionSelector'] == null %}
+
+                                            <td class="center"><span class="text-muted">X-old sample orders</span></td>
+
+                                            {% else %}
+
+                                                <!-- http://prescrip.digbyduke.com/uploadtest/uploads/sooshi6_JUN_18_DDNO_B283B548FD2F.pdf -->
+
+                                                {% if order.dd_attributes['optionSelector'] == "prescriptionUpload"%}
+
+                                                {% set prescriptionFile = "http://prescrip.digbyduke.com/uploadtest/uploads/{{ order.customer['first_name']}}_{{order.dd_attributes['UploadAttributes']}}"  %}
+
+                                                <td class="center"><a href="http://prescrip.digbyduke.com/uploadtest/uploads/{{ order.customer['first_name']}}_{{order.dd_attributes['UploadAttributes']}}.pdf" target="_blank"> <span class ="glyphicon glyphicon-file" aria-hidden="true"></span></a></td>
+
+                                                {% else %}
+
+                                                <td class="center"><span class="text-danger">{{ order.dd_attributes['optionSelector']  }}</span></td>
+
+                                                {% endif %}
+
+                                            {% endif %}
+
+                                            <!--.order status -->
+                                            {% set orderStatus = order.lab_attributes['orderStatus'] %}
+
+
+                                            {% if orderStatus == null %}
+
+                                            <td><a href="http://178.238.232.229:8082/createLabOrder.php?orderId={{order.id}}" target="_blank">Create Lab Order </a></td>
+
+                                            {% else %}
+
+                                            <td><a href="http://178.238.232.229:8082/labPdf/{{order.id}}.pdf" target="_blank"> <span class ="glyphicon glyphicon-file" aria-hidden="true"></span></a><span class="label label-default">{{ orderStatus}}</span></td>
+
+                                            {% endif %}
+
+                                        </tr>
+
+                                        {% endfor %} <!-- / .order loop in twig END -->
+
+                                    </tbody>
+
+                                </table>
+                            </div>
+                            <!-- /.table-responsive -->
+                            <br></br>
+                            <div class="well">
+                                <h4>DataTables Usage Information</h4>
+                                <p>DataTables is a very flexible, advanced tables plugin for jQuery. In SB Admin, we are using a specialized version of DataTables built for Bootstrap 3. We have also customized the table headings to use Font Awesome icons in place of images. For complete documentation on DataTables, visit their website at <a target="_blank" href="https://datatables.net/">https://datatables.net/</a>.</p>
+                                <a class="btn btn-default btn-lg btn-block" target="_blank" href="https://datatables.net/">View DataTables Documentation</a>
+                            </div>
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div> <!-- /.row tab 1 content -->
+
+            <!-- /.vikas deleted stuff above -->
+            <div id="tab2" class="tab-pane fade">
+            <h3>Payments</h3>
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                      Orders status and action panel: Prescription could be any of 1)an uploaded file, 2) user inputs, 3) call customer<!-- / vikas stuff starts here -->
+                    </div>
+                    <!-- /.panel-heading -->
+                    <div class="panel-body">
+                        <div class="dataTable_wrapper">
+                            <table class="table table-striped table-bordered table-hover" id="dataTables1">
+
+
+                                <thead>
+                                    <tr>
+                                        <th>OrderName</th>
+                                        <th>Type(Pay/Orig)</th>
+                                        <th>Payment Date</th>
+                                        <th>Customer Name</th>
+                                        <th>PaymentFor</th>
+                                        <th>[placeholder column]</th>
+
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                  {% for payment in payments %} <!-- / .order loop in twig -->
+                                    <tr class="odd gradeX">
+                                        <td><a href="https://eyes.myshopify.com/admin/orders/{{payment.id}}" target="_blank">{{payment.name}}</a></td>
+                                        <td>{{ (payment.isPayment == "yes")  ? 'Payment' : 'Normal' }}</td>
+                                        <td>{{payment.created_at[:10]}}</td>
+                                        <td class="center">{{payment.customer['last_name']}},{{payment.customer['first_name']}}</td>
+                                        <td class="center">{{payment.paymentFor}}</td>
+                                        <td class="center">p</td>
+                                    </tr>
+
+                                    {% endfor %} <!-- / .order loop in twig END -->
+
+                                </tbody>
+
+                            </table>
+                        </div>
+                        <!-- /.table-responsive -->
+                        <br></br>
+                        <div class="well">
+                            <h4>DataTables Usage Information</h4>
+                            <p>DataTables is a very flexible, advanced tables plugin for jQuery. In SB Admin, we are using a specialized version of DataTables built for Bootstrap 3. We have also customized the table headings to use Font Awesome icons in place of images. For complete documentation on DataTables, visit their website at <a target="_blank" href="https://datatables.net/">https://datatables.net/</a>.</p>
+                            <a class="btn btn-default btn-lg btn-block" target="_blank" href="https://datatables.net/">View DataTables Documentation</a>
+                        </div>
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+          </div> <!-- /.tab 2 -->
+
+
+
+
+
+        </div> <!-- /.div tab content ends  -->
+
+
+
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="../bootstrap-sba/bower_components/jquery/dist/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="../bootstrap-sba/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="../bootstrap-sba/bower_components/metisMenu/dist/metisMenu.min.js"></script>
+
+    <!-- DataTables JavaScript -->
+    <script src="../bootstrap-sba/bower_components/datatables/media/js/jquery.dataTables.min.js"></script>
+    <script src="../bootstrap-sba/bower_components/datatables-plugins/integration/bootstrap/3/dataTables.bootstrap.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="../bootstrap-sba/dist/js/sb-admin-2.js"></script>
+
+    <!-- Page-Level Demo Scripts - Tables - Use for reference -->
+    <script>
+    $(document).ready(function() {
+        $('#dataTables-example').DataTable({
+                responsive: true
+        });
+    });
+
+    $(document).ready(function() {
+        $('#dataTables1').DataTable({
+                responsive: true
+        });
+    });
+
+    $(document).ready(function() {
+        $('#dataTables2').DataTable({
+                responsive: true
+        });
+    });
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>My Webpage variable is: {{ name }}{{ x }}</title>
+
+    </head>
+    <body>
+
+      {% for order in orders %} 
+
+      <h1>Login Here: {{ order.name }} </h1>
+      {% endfor %}
+      <div 'id=error'>
+      </div>
+
+      <form action="/login" method="post">
+          <label for="username">Username:</label>
+          <input type="text" id="username" name="_username" value="{{ last_username }}" />
+
+          <label for="password">Password:</label>
+          <input type="password" id="password" name="_password" />
+
+          <input type="hidden" name="_target_path" value="account" />
+
+          <input type="submit" name="login" />
+      </form>
+
+    </body>
+</html>
