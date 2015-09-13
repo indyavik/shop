@@ -1,47 +1,22 @@
-About:
-A Personal projects that implementing a number of order management functionality for e-Commerce prescription eyewear store that leverages shopify.
-  - Get all the order data from shopify and store in the local database (database is mongodb)
-  - Ability to update and modify order (outside shopify), create pdf of order file and send to third party
-  - extensive order status management (specific to prescription eyewear business)
-  - This application uses shopify API (without any external adaptor), and (potentially) webhook.
+# About this project: 
+A Personal projects that implementing a number of order management functionality for e-Commerce prescription eyewear store that leverages shopify. Main objectives are - 
+  -  >Retrieve and store order data from shopify and store in the local database (database is mongodb)
+  -  >Provide Ability to update and modify order information (outside shopify), create and send order data to related third parties (primarily in pdf format)  
+  - >Extensive order status management (specific to prescription eyewear business)
 
+########################################################
+#####  Key notes: 
+- Relies on shopify API (without any external adaptor), and (potentially) webhook.
 
--> Project uses PHP and PHP-TWIG for templating. I tinkered around many web frameworks (like ROR) for php and don't like any. This project
+- Project uses PHP and PHP-TWIG for templating. I tinkered around many web frameworks (like ROR) for php and don't like any. This project
 also looked to implement a simpler (no frills) structural framework for MVC in php (twig as template)
+########################################################
 
-###########################################################################
-
-development notes:
-  >database-> "api"
-  >collections:
-      pstuff (no unique index)
-      users
-      recent
+Development notes:
+  - database-> "api"
+  - collections : pstuff (no unique index), users, and recent 
 
 PRODUCTION To DOs:
-  >use mongodb auth
-  >database-> "ddno"
-  >collections
-      orders (unique index on id)
-      users
-      recent
-
-###########################################################################
->Vikas's Preferred directory structure when working with twigg.
->lowercase directory names preferred (simply a personal preference)
-###########################################################################
-
-AppName
-  |
-  |
-   /controllers -> all php files, render anything via twigg. This is web-server Root Directory as well.
-      -Snippets -> equivalent to 'include' directory, all supporting functions and other include files go here 
-   /views -> all views.
-      -Snippets -> keep any custom js/css as well as chunks of html files (example menu)
-      -js/css folder -> whatever is the name of this folder. include a header and footer via snippet.
-
-   /tasks -> any php files that perform background taks, either corn-shelled or otherwise.
-
-   /dbs -> roughly equivalent to Model. but one place to manage database related tasks, and connection files
-
-   /test -> test and debug
+  - use mongodb auth
+  - database-> "ddno"
+   - collections (orders, users and recent)
