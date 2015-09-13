@@ -1,9 +1,0 @@
-{
-    "type": "sftp",
-    "host": "178.238.232.229",
-    "username": "vik",
-    "password": "teaseharsh",
-    "port": 22,
-    "remotePath": "/var/www/html/projects/shop",
-    "uploadOnSave": false
-}
