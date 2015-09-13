@@ -22,8 +22,8 @@ function getShopOrderSinceId($recentId) // getShopOrderSinceId('492908353');4927
   ###returns the orders from shop in php associative array ##
 {
 
-//setURL
-$jurl = "https://b9f4093d734dade3859306e0c753c08d:ce377163f4675074b3760f86e4c703dc@eyes.myshopify.com/admin/orders.json?since_id=".$recentId;
+//setURL, replace xxx:yyy with appropriate auth tokens 
+$jurl = "https://b9f4093dxxxx:ce377163fyyy@eyes.myshopify.com/admin/orders.json?since_id=".$recentId;
 
 //curl stuff here
 $curl = curl_init();
