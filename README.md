@@ -8,8 +8,7 @@ A Personal projects that implementing a number of order management functionality
 #####  Key notes: 
 - Relies on shopify API (without any external adaptor), and (potentially) webhook.
 
-- Project uses PHP and PHP-TWIG for templating. I tinkered around many web frameworks (like ROR) for php and don't like any. This project
-also looked to implement a simpler (no frills) structural framework for MVC in php (twig as template)
+- Project uses PHP and PHP-TWIG for templating and attempts to follow MVC patterns but does  not use a web framework (I looked for 'flask' or 'sinatra' like micro framework for php but didn't find exactly what was looking for).  
 ########################################################
 
 Development notes:
